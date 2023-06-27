@@ -4,7 +4,6 @@ const client = new Discord.Client()
 const puppeteer = require("puppeteer")
 const fs = require('fs')
 const downloader = require('nodejs-file-downloader')
-const soft = "856586558545985576"
 
 client.once("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
@@ -48,9 +47,6 @@ client.on("message", async msg => {
         const response = await scrapeProduct(msg.attachments.first().name, text)
         msg.channel.send(response)
         fs.unlink(msg.attachments.first().name, () => console.log('file deleted'))
-    }
-    else if (msg.content.startsWith('.ruby')){
-        msg.channel.send('https://cdn.discordapp.com/attachments/847249863481622552/900754393765404722/ruby.gif')
     }
 })
 
@@ -96,10 +92,6 @@ async function scrapeProduct(image, text){
     const isBotMentioned = mentionedUsers.size
       ? mentionedUsers.first().id === client.user.id
       : false;
-  
-    if (isBotMentioned && args.length === 1 && message.author.id === soft) {
-      return message.channel.send('iluvyu');
-    }
   });
 
-client.login("ODQ5NDA2NTE1Njg5NDIyODc4.YLatdg.5TIYHaXOXzgsfztwQ40LtCpysfk")
+client.login(TOKEN)
